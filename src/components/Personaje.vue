@@ -1,8 +1,8 @@
 <template>
-  <div id="container" style="text-align: center">
-    {{ personaje.name }} <br />
-    <img :src="personaje.img" alt="" style="max-width: 200px" /> <br />
+  <div id="container" class="divBox flex items-center justify-center">
+    <p>{{ personaje.name }}</p>
     <button @click="enviarFav">❤️</button>
+    <img :src="personaje.img" alt="" style="max-width: 200px" />
   </div>
 </template>
 

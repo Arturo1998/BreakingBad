@@ -1,17 +1,15 @@
 <template>
-  <div id="container" style="text-align: center">
-    <input type="text" v-model="filtro" placeholder="Busca un personaje" />
-    <ul
-      style="list-style-type: none"
-      v-for="(e, index) in filteredCharacters"
-      :key="index"
-    >
+  <div id="container">
+    <div class="text-center">
+      <input type="text" v-model="filtro" placeholder="Busca un personaje" />
+    </div>
+    <ul v-for="(e, index) in filteredCharacters" :key="index">
       <li>
         <Personaje :personaje="e" @enviarFavorito="aniadirFavorito" />
       </li>
     </ul>
     <div style="position: absolute; top: 0%">
-      <ListaFavs :listaFavs="listaFav" style="margin-top: 0%" />
+      <ListaFavs :listaFavs="listaFav" />
     </div>
   </div>
 </template>
@@ -47,8 +45,13 @@ export default {
   },
   methods: {
     aniadirFavorito(data) {
-      this.listaFav.push(data);
-      console.log(this.listaFav);
+      const result = this.listaFav.filter(
+        (personaje) => personaje.char_id === data.char_id
+      );
+      if (result.length === 0) {
+        console.log(this.listaFav);
+        this.listaFav.push(data);
+      }
     },
   },
 };
