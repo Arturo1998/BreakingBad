@@ -1,8 +1,6 @@
 <template>
   <body class="bg-gray-800 w-100">
-    <div class="cuerpo">
-      <ListaPersonajes :lista="characters" />
-    </div>
+    <ListaPersonajes :lista="characters" @agregarFav="aniadirFavorito" />
   </body>
 </template>
 
@@ -18,7 +16,7 @@ export default {
   },
 
   data() {
-    return { characters: [] };
+    return { characters: [], favs: [] };
   },
   methods: {
     async loadCharacters() {
@@ -29,6 +27,15 @@ export default {
         this.characters = response.data;
       } catch (error) {
         console.log(error);
+      }
+    },
+
+    aniadirFavorito(data) {
+      const result = this.favs.filter(
+        (personaje) => personaje.char_id === data.char_id
+      );
+      if (result.length === 0) {
+        this.favs.push(data);
       }
     },
   },
