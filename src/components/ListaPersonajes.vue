@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <div class="text-center">
+    <div class="text-center content-center items-center justify-content-center">
       <input type="text" v-model="filtro" placeholder="Busca un personaje" />
     </div>
     <ul v-for="(e, index) in filteredCharacters" :key="index">
@@ -8,7 +8,7 @@
         <Personaje :personaje="e" @enviarFavorito="aniadirFavorito" />
       </li>
     </ul>
-    <div style="position: absolute; top: 0%">
+    <div class="flex-auto max-w-lg border border-orange-700 rounded">
       <ListaFavs :listaFavs="listaFav" />
     </div>
   </div>

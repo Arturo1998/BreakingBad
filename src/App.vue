@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <body class="bg-gray-800 w-100">
     <div class="cuerpo">
       <ListaPersonajes :lista="characters" />
     </div>
@@ -9,10 +9,12 @@
 <script>
 import axios from "axios";
 import ListaPersonajes from "@/components/ListaPersonajes.vue";
+import ListaFavs from "@/components/ListaFavs.vue";
 export default {
   name: "App",
   components: {
     ListaPersonajes,
+    ListaFavs,
   },
 
   data() {
@@ -37,10 +39,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.cuerpo {
-  background-color: rgb(31, 143, 23);
-  min-width: 100%;
-  margin: 0;
-}
-</style>
+<style scoped></style>
