@@ -1,9 +1,9 @@
 <template>
   <div
-    class="m-5 p-5 flex items-center rounded-lg border max-w-xl hover:bg-gray-100 border-orange-700 bg-gray-700 hover:bg-gray-900"
+    class="p-1 flex items-center rounded-lg border max-w-xl border-orange-700 bg-gray-700 hover:bg-gray-900"
   >
-    <img class="w-64" :src="personaje.img" alt="" />
-    <div class="flex-col p-4">
+    <img class="max-w-xs h-" :src="personaje.img" alt="" />
+    <div class="">
       <div>
         <h5 class="mb-2 text-2xl text-white">
           {{ personaje.name }}
@@ -15,7 +15,7 @@
       </div>
       <button
         class="text-white rounded bg-gray-500 py-2 px-4 border border-orange-700 mt-3"
-        @click="enviarFav()"
+        @click="enviarFav"
       >
         ❤️
       </button>
@@ -23,21 +23,19 @@
   </div>
 </template>
 
-<script>
+<script lang="js">
 export default {
   name: "ListaPersonajes",
-  emits: ["enviarFavorito"],
-  data() {
-    return {};
-  },
   props: {
     personaje: {
       type: Object,
     },
   },
+  emits: ["enviarFav"],
   methods: {
     enviarFav() {
-      this.$emit("enviarFavorito", this.personaje);
+      this.$emit("enviarFav", this.personaje);
+      console.log("enviando desde personaje...")
     },
   },
 };

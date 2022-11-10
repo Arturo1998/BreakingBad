@@ -1,6 +1,13 @@
 <template>
   <body class="bg-gray-800 w-100">
-    <ListaPersonajes :lista="characters" @agregarFav="aniadirFavorito" />
+    <div class="grid grid-cols-2">
+      <div class="ml-10">
+        <ListaPersonajes :lista="characters" @enviarFav="aniadirFavorito" />
+      </div>
+      <div class="max-w-lg border border-orange-700 rounded ml-10 mt-6">
+        <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
+      </div>
+    </div>
   </body>
 </template>
 
@@ -16,7 +23,7 @@ export default {
   },
 
   data() {
-    return { characters: [], favs: [] };
+    return { characters: [], favs: [], filtro: "" };
   },
   methods: {
     async loadCharacters() {
@@ -36,7 +43,12 @@ export default {
       );
       if (result.length === 0) {
         this.favs.push(data);
+        console.log(this.favs);
       }
+    },
+
+    eliminarElemento(data) {
+      this.favs = this.favs.filter((el) => el !== data);
     },
   },
 

@@ -1,0 +1,43 @@
+<template>
+  <div class="flex items-center">
+    <div class="p-5">
+      <img class="ml-5 w-12 h-16 rounded-full" :src="favorito.img" alt="" />
+    </div>
+
+    <h1 class="text-white p-3">{{ favorito.name }}</h1>
+
+    <button class="rounded-lg text-white bg-orange-700 p-3 ml-10">
+      Ver más
+    </button>
+    <button
+      class="rounded-lg text-white bg-red-800 p-3 ml-10"
+      @click="eliminarFav"
+    >
+      🗑️
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "PersonajeFav",
+  components: {},
+  data() {
+    return {};
+  },
+  props: {
+    favorito: {
+      type: Object,
+    },
+  },
+  emits: ["eliminarFav"],
+  methods: {
+    eliminarFav() {
+      if (confirm(`¿Estás seguro de eliminar a ${this.favorito.name}?`))
+        this.$emit("eliminarFav", this.favorito);
+    },
+  },
+};
+</script>
+
+<style scoped></style>

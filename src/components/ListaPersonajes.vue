@@ -1,34 +1,36 @@
 <template>
-  <div class="text-center">
-    <input type="text" v-model="filtro" placeholder="Busca un personaje" />
-  </div>
   <div>
-    <div class="grid grid-cols-3 bg-gray-800">
-      <ul v-for="(e, index) in filteredCharacters" :key="index" class="">
+    <div class="text-center">
+      <input type="text" v-model="filtro" placeholder="Busca un personaje" />
+    </div>
+    <div class="bg-gray-800">
+      <ul
+        v-for="(personaje, index) in filteredCharacters"
+        :key="index"
+        class=""
+      >
         <li class="">
-          <Personaje :personaje="e" @enviarFavorito="aniadirFavorito" />
+          <Personaje
+            :personaje="personaje"
+            @enviarFav="aniadirElementoFavorito"
+          />
         </li>
       </ul>
-      <div class="flex-auto max-w-lg border border-orange-700 rounded">
-        <ListaFavs :listaFavs="listaFav" />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Personaje from "@/components/Personaje.vue";
-import ListaFavs from "@/components/ListaFavs.vue";
 export default {
   name: "ListaPersonajes",
+  emits: ["enviarFav"],
   components: {
     Personaje,
-    ListaFavs,
   },
   data() {
     return {
       filtro: "",
-      listaFav: [],
     };
   },
   props: {
@@ -36,7 +38,6 @@ export default {
       type: Array,
     },
   },
-  emits: ["agregarFav"],
 
   computed: {
     filteredCharacters() {
@@ -47,13 +48,9 @@ export default {
     },
   },
   methods: {
-    aniadirFavorito(data) {
-      const result = this.listaFav.filter(
-        (personaje) => personaje.char_id === data.char_id
-      );
-      if (result.length === 0) {
-        this.listaFav.push(data);
-      }
+    aniadirElementoFavorito(data) {
+      this.$emit("enviarFav", data);
+      console.log("recibiendo en segundo nivel...");
     },
   },
 };
