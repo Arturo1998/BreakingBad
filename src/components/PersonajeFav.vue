@@ -1,20 +1,20 @@
 <template>
-  <div class="items-center">
+  <div class="items-center text-center flex flex-col">
     <div class="">
-      <img class="h-50 rounded" :src="favorito.img" alt="" />
+        <img class="h-auto rounded" :src="favorito.img" alt="" />
     </div>
-
-    <h1 class="text-white p-3">{{ favorito.name }}</h1>
-
-    <button class="rounded-lg text-white bg-orange-700 p-3 ml-10 w-40">
-      Ver más
-    </button>
-    <button
-      class="rounded-lg text-white bg-red-800 p-3 ml-10"
+      <h1 class="text-white p-3">{{ favorito.name }}</h1>
+    <div class="flex flex-col md:flex-row ">
+      <button class="mr-5 rounded-lg text-white bg-orange-700 p-2 min-w-40 mb-2">
+       Ver más
+      </button>
+      <button
+      class="rounded-lg text-white bg-red-800 p-2 mb-2 w-20" 
       @click="eliminarFav"
-    >
+      >
       🗑️
-    </button>
+      </button>
+    </div>
   </div>
 </template>
 

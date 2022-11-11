@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-center ml-20">
     <input type="text" v-model="filtro" placeholder="Busca un personaje" />
   </div>
   <div class="bg-gray-800 mt-6 mb-10">

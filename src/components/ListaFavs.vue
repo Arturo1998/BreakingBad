@@ -1,7 +1,7 @@
 <template>
   <ul v-for="(personaje, index) in listaFavs" :key="index" class="rounded">
     <li
-      class="max-w-md p-3 hover:bg-gray-900 mb-0.25 border border-orange-700 rounded"
+      class="max-w-md p-3 bg-gray-700 hover:bg-gray-900 mb-1 border border-orange-700 rounded"
     >
       <PersonajeFav :favorito="personaje" @eliminarFav="borrarFav" />
     </li>
