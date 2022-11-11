@@ -1,14 +1,12 @@
 <template>
-  <body class="bg-gray-800 w-100">
-    <div class="grid grid-cols-2">
-      <div class="ml-10">
-        <ListaPersonajes :lista="characters" @enviarFav="aniadirFavorito" />
-      </div>
-      <div class="max-w-lg border border-orange-700 rounded ml-10 mt-6">
-        <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
-      </div>
+  <div class="grid grid-cols-3 grid-flow-col bg-gray-800 w-100">
+    <div class="ml-10 mr-10 col-span-2">
+      <ListaPersonajes :lista="characters" @enviarFav="aniadirFavorito" />
     </div>
-  </body>
+    <div class="h-30 border-orange-700 sticky top-0 rounded mt-12 mr-5">
+      <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
+    </div>
+  </div>
 </template>
 
 <script>

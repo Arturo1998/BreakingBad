@@ -1,12 +1,12 @@
 <template>
-  <div class="flex items-center">
-    <div class="p-5">
-      <img class="ml-5 w-12 h-16 rounded-full" :src="favorito.img" alt="" />
+  <div class="items-center">
+    <div class="">
+      <img class="h-50" :src="favorito.img" alt="" />
     </div>
 
     <h1 class="text-white p-3">{{ favorito.name }}</h1>
 
-    <button class="rounded-lg text-white bg-orange-700 p-3 ml-10">
+    <button class="rounded-lg text-white bg-orange-700 p-3 ml-10 w-40">
       Ver más
     </button>
     <button

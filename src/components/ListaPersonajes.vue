@@ -1,22 +1,16 @@
 <template>
-  <div>
-    <div class="text-center">
-      <input type="text" v-model="filtro" placeholder="Busca un personaje" />
-    </div>
-    <div class="bg-gray-800">
-      <ul
-        v-for="(personaje, index) in filteredCharacters"
-        :key="index"
-        class=""
-      >
-        <li class="">
-          <Personaje
-            :personaje="personaje"
-            @enviarFav="aniadirElementoFavorito"
-          />
-        </li>
-      </ul>
-    </div>
+  <div class="text-center">
+    <input type="text" v-model="filtro" placeholder="Busca un personaje" />
+  </div>
+  <div class="bg-gray-800 mt-6 mb-10">
+    <ul v-for="(personaje, index) in filteredCharacters" :key="index" class="">
+      <li class="mb-5">
+        <Personaje
+          :personaje="personaje"
+          @enviarFav="aniadirElementoFavorito"
+        />
+      </li>
+    </ul>
   </div>
 </template>
 

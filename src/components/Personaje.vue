@@ -1,18 +1,24 @@
 <template>
   <div
-    class="p-1 flex items-center rounded-lg border max-w-xl border-orange-700 bg-gray-700 hover:bg-gray-900"
+    class="p-1 grid grid-cols-3 rounded-lg border border-orange-700 bg-gray-700 hover:bg-gray-900"
   >
-    <img class="max-w-xs h-" :src="personaje.img" alt="" />
     <div class="">
-      <div>
-        <h5 class="mb-2 text-2xl text-white">
-          {{ personaje.name }}
-        </h5>
-        <p class="font-normal text-white">
-          <b>Profesions: </b> {{ personaje.occupation[0] }} <br />
-          {{ personaje.occupation[1] }}
-        </p>
-      </div>
+      <img class="h-72" :src="personaje.img" alt="" />
+    </div>
+    <div class="ml-10 w-96">
+      <h5 class="text-2xl font-['Roboto'] text-white font mt-10">
+        {{ personaje.name }}
+      </h5>
+
+      <p class="font-normal text-white">
+        <b>Profesions: </b>
+        <br />
+        {{ personaje.occupation[0] }}
+        <br />
+        {{ personaje.occupation[1] }}
+      </p>
+    </div>
+    <div class="mt-56">
       <button
         class="text-white rounded bg-gray-500 py-2 px-4 border border-orange-700 mt-3"
         @click="enviarFav"
