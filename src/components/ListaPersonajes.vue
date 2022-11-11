@@ -4,7 +4,7 @@
   </div>
   <div class="bg-gray-800 mt-6 mb-10">
     <ul v-for="(personaje, index) in filteredCharacters" :key="index" class="">
-      <li class="mb-5">
+      <li class="mb-5 max-w-2xl">
         <Personaje
           :personaje="personaje"
           @enviarFav="aniadirElementoFavorito"

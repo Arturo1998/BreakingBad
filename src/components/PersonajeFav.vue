@@ -1,7 +1,7 @@
 <template>
   <div class="items-center">
     <div class="">
-      <img class="h-50" :src="favorito.img" alt="" />
+      <img class="h-50 rounded" :src="favorito.img" alt="" />
     </div>
 
     <h1 class="text-white p-3">{{ favorito.name }}</h1>

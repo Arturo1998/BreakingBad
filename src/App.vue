@@ -3,7 +3,9 @@
     <div class="ml-10 mr-10 col-span-2">
       <ListaPersonajes :lista="characters" @enviarFav="aniadirFavorito" />
     </div>
-    <div class="h-30 border-orange-700 sticky top-0 rounded mt-12 mr-5">
+    <div
+      class="max-h-30 min-h-30 border-orange-700 sticky top-0 rounded mt-12 mr-5"
+    >
       <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
     </div>
   </div>
