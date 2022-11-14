@@ -1,11 +1,13 @@
 <template>
-  <ul v-for="(personaje, index) in listaFavs" :key="index" class="rounded">
-    <li
-      class="max-w-md p-3 bg-gray-700 hover:bg-gray-900 mb-1 border border-orange-700 rounded"
-    >
-      <PersonajeFav :favorito="personaje" @eliminarFav="borrarFav" />
-    </li>
-  </ul>
+  <div class="items-center text-center flex md:flex flex-col">
+    <ul v-for="(personaje, index) in listaFavs" :key="index" class="rounded">
+      <li
+        class="p-3 bg-gray-700 hover:bg-gray-900 mb-1 border border-orange-700 rounded"
+      >
+        <PersonajeFav :favorito="personaje" @eliminarFav="borrarFav" />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

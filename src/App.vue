@@ -1,19 +1,41 @@
 <template>
-  <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
-  <div class="flex flex-col md:flex-row bg-gray-800 w-100 p-10">
-    <div class="mr-10 col-span-2">
-      <ListaPersonajes
-        :lista="filtrarPersonajes"
-        @enviarFav="aniadirFavorito"
-      />
+  <div class="m-auto bg-gray-800">
+    <img src="./assets/imagenFondo.jpg" alt="" class="" />
+    <div class="mt-5 mb-5">
+      <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
     </div>
-    <div class="max-h-30 20 border-orange-700 top-0 rounded mt-12 mr-5">
-      <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
+
+    <div class="text-center flex flex-col lg:flex-row bg-gray-800 w-100">
+      <div class="m-auto" v-if="filtrarPersonajes">
+        <h1
+          class="mb-2 rounded-lg bg-gray-600 text-white border border-orange-700 p-2"
+        >
+          Tu búsqueda
+        </h1>
+        <ListaPersonajes
+          :lista="filtrarPersonajes"
+          @enviarFav="aniadirFavorito"
+        />
+      </div>
+      <div
+        class="border-orange-700 rounded p-50 text-center m-auto mt-1"
+        v-if="this.favs.length > 0"
+      >
+        <h1
+          class="mb-5 rounded-lg bg-gray-600 text-white border border-orange-700 p-2"
+        >
+          Lista de favoritos
+        </h1>
+        <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
+      </div>
     </div>
+    <loading v-model:active="isLoading" :is-full-page="true" loader="bars" />
   </div>
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/css/index.css";
 import axios from "axios";
 import Buscador from "@/components/Buscador.vue";
 import ListaPersonajes from "@/components/ListaPersonajes.vue";
@@ -24,22 +46,36 @@ export default {
     ListaPersonajes,
     ListaFavs,
     Buscador,
+    Loading,
   },
 
   data() {
-    return { characters: [], favs: [], filtrar_por: "", filtro: "" };
+    return {
+      characters: [],
+      favs: [],
+      filtrar_por: "",
+      filtro: "",
+      isLoading: false,
+    };
+  },
+
+  mounted() {
+    if (localStorage.getItem("favs")) {
+      this.favs = JSON.parse(localStorage.getItem("favs"));
+    }
+
+    this.loadCharacters();
   },
 
   computed: {
     filtrarPersonajes() {
-      if(this.filtrar_por!="") {
+      if (this.filtrar_por != "") {
         return this.characters.filter((character) =>
-        character.name.toUpperCase().includes(this.filtrar_por.toUpperCase())
-      );
-      } else{
-        return "";
+          character.name.toUpperCase().includes(this.filtrar_por.toUpperCase())
+        );
+      } else {
+        return null;
       }
-      
     },
   },
 
@@ -61,22 +97,27 @@ export default {
       );
       if (result.length === 0) {
         this.favs.push(data);
-        console.log(this.favs);
+        this.guardarLocal();
       }
     },
 
     eliminarElemento(data) {
       this.favs = this.favs.filter((el) => el !== data);
+      localStorage.setItem("favs", JSON.stringify(this.favs));
     },
 
     filtrar(data) {
       this.filtrar_por = data;
-      console.log(this.filtrar_por);
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1500);
     },
-  },
 
-  mounted() {
-    this.loadCharacters();
+    guardarLocal() {
+      const parsed = JSON.stringify(this.favs);
+      localStorage.setItem("favs", parsed);
+    },
   },
 };
 </script>
