@@ -27,7 +27,7 @@
     </div>
     <div class="mt-3">
       <button
-        class="text-white rounded bg-gray-500 py-2 px-4 border border-orange-700 mt-12"
+        class="text-white rounded bg-gray-500 py-2 px-4 border border-orange-700 mt-24 mr-20"
         @click="enviarFav"
       >
         ❤️
