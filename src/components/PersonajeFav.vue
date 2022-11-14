@@ -1,9 +1,17 @@
 <template>
   <div class="items-center text-center flex flex-col w-40">
-    <img class="rounded-full max-h-32" :src="favorito.img" alt="" />
+    <img
+      class="rounded-full max-h-32"
+      :src="favorito.img"
+      alt=""
+      v-if="verMas"
+    />
     <h1 class="text-white p-3">{{ favorito.name }}</h1>
     <div class="flex flex-col">
-      <button class="rounded-lg text-white bg-orange-700 p-2 w-20 mb-2">
+      <button
+        class="rounded-lg text-white bg-orange-700 p-2 w-20 mb-2"
+        @click="verMas = !verMas"
+      >
         Ver más
       </button>
       <button
@@ -21,7 +29,9 @@ export default {
   name: "PersonajeFav",
   components: {},
   data() {
-    return {};
+    return {
+      verMas: true,
+    };
   },
   props: {
     favorito: {
