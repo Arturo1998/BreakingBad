@@ -1,11 +1,13 @@
 <template>
-  <div class="flex flex-col md:flex-row  bg-gray-800 w-100 p-10">
+  <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
+  <div class="flex flex-col md:flex-row bg-gray-800 w-100 p-10">
     <div class="mr-10 col-span-2">
-      <ListaPersonajes :lista="characters" @enviarFav="aniadirFavorito" />
+      <ListaPersonajes
+        :lista="filtrarPersonajes"
+        @enviarFav="aniadirFavorito"
+      />
     </div>
-    <div
-      class="max-h-30 20 border-orange-700 top-0 rounded mt-12 mr-5"
-    >
+    <div class="max-h-30 20 border-orange-700 top-0 rounded mt-12 mr-5">
       <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
     </div>
   </div>
@@ -13,6 +15,7 @@
 
 <script>
 import axios from "axios";
+import Buscador from "@/components/Buscador.vue";
 import ListaPersonajes from "@/components/ListaPersonajes.vue";
 import ListaFavs from "@/components/ListaFavs.vue";
 export default {
@@ -20,11 +23,26 @@ export default {
   components: {
     ListaPersonajes,
     ListaFavs,
+    Buscador,
   },
 
   data() {
-    return { characters: [], favs: [], filtro: "" };
+    return { characters: [], favs: [], filtrar_por: "", filtro: "" };
   },
+
+  computed: {
+    filtrarPersonajes() {
+      if(this.filtrar_por!="") {
+        return this.characters.filter((character) =>
+        character.name.toUpperCase().includes(this.filtrar_por.toUpperCase())
+      );
+      } else{
+        return "";
+      }
+      
+    },
+  },
+
   methods: {
     async loadCharacters() {
       try {
@@ -49,6 +67,11 @@ export default {
 
     eliminarElemento(data) {
       this.favs = this.favs.filter((el) => el !== data);
+    },
+
+    filtrar(data) {
+      this.filtrar_por = data;
+      console.log(this.filtrar_por);
     },
   },
 
