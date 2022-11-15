@@ -1,8 +1,12 @@
 <template>
   <div
-    class="m-auto bg-gradient-to-b from-gray-900 via-slate-800 to-amber-800 min-h-screen"
+    class="m-auto bg-gradient-to-b from-gray-900 via-gray-800 to-amber-900 min-h-screen"
   >
-    <img src="./assets/imagenFondo.jpg" alt="" class="w-100 max-h-96 mx-auto" />
+    <img
+      src="./assets/imagenFondo.jpg"
+      alt=""
+      class="min-w-100 max-h-96 mx-auto"
+    />
     <div class="mt-5 mb-5">
       <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
     </div>
