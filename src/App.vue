@@ -7,11 +7,11 @@
       alt=""
       class="min-w-100 max-h-96 mx-auto"
     />
-    <div class="mt-5 mb-5">
+    <div class="mt-5 mb-5 flex justify-center">
       <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
     </div>
 
-    <div class="text-center flex flex-col lg:flex-row w-100">
+    <div class="text-center flex flex-col md:flex-row w-100">
       <div class="m-auto" v-if="filtrarPersonajes">
         <h1
           class="mb-2 rounded-lg bg-gray-600 text-white border border-orange-700 p-2"
@@ -41,6 +41,9 @@
 </template>
 
 <script>
+/*<button @click="" class="rounded-lg text-white bg-orange-700 p-2 w-auto mb-2">
+        Cargar Personajes
+      </button>*/
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/css/index.css";
 import axios from "axios";
@@ -76,12 +79,12 @@ export default {
 
   computed: {
     filtrarPersonajes() {
-      if (this.filtrar_por != "") {
+      if (this.filtrar_por === "") {
+        return this.characters;
+      } else if (this.filtrar != "") {
         return this.characters.filter((character) =>
           character.name.toUpperCase().includes(this.filtrar_por.toUpperCase())
         );
-      } else {
-        return null;
       }
     },
   },
@@ -99,10 +102,7 @@ export default {
     },
 
     aniadirFavorito(data) {
-      const result = this.favs.filter(
-        (personaje) => personaje.char_id === data.char_id
-      );
-      if (result.length === 0) {
+      if (!this.favs.includes(data)) {
         this.favs.push(data);
         this.guardarLocal();
       }
