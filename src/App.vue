@@ -1,11 +1,13 @@
 <template>
-  <div class="m-auto bg-gray-800 h-screen">
+  <div
+    class="m-auto bg-gradient-to-b from-gray-900 via-slate-800 to-amber-800 min-h-screen"
+  >
     <img src="./assets/imagenFondo.jpg" alt="" class="w-100 max-h-96 mx-auto" />
     <div class="mt-5 mb-5">
       <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
     </div>
 
-    <div class="text-center flex flex-col lg:flex-row bg-gray-800 w-100">
+    <div class="text-center flex flex-col lg:flex-row w-100">
       <div class="m-auto" v-if="filtrarPersonajes">
         <h1
           class="mb-2 rounded-lg bg-gray-600 text-white border border-orange-700 p-2"
@@ -14,11 +16,12 @@
         </h1>
         <ListaPersonajes
           :lista="filtrarPersonajes"
-          @enviarFav="aniadirFavorito" bg-gray-80
+          @enviarFav="aniadirFavorito"
+          bg-gray-80
         />
       </div>
       <div
-        class="border-orange-700 rounded p-50 text-center m-auto mt-1"
+        class="border-orange-700 rounded p-50 text-center m-auto mt-1 mb-10"
         v-if="this.favs.length > 0"
       >
         <h1

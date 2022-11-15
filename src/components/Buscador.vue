@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center bg-gray-800">
+  <div class="text-center">
     <input
       type="text"
       v-model="filtro"
