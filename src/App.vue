@@ -1,6 +1,6 @@
 <template>
-  <div class="m-auto bg-gray-800">
-    <img src="./assets/imagenFondo.jpg" alt="" class="" />
+  <div class="m-auto bg-gray-800 h-screen">
+    <img src="./assets/imagenFondo.jpg" alt="" class="w-100 max-h-96 mx-auto" />
     <div class="mt-5 mb-5">
       <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
     </div>
@@ -14,7 +14,7 @@
         </h1>
         <ListaPersonajes
           :lista="filtrarPersonajes"
-          @enviarFav="aniadirFavorito"
+          @enviarFav="aniadirFavorito" bg-gray-80
         />
       </div>
       <div

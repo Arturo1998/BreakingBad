@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-800 mt-6 mb-10">
     <ul v-for="(personaje, index) in lista" :key="index" class="">
-      <li class="mb-5 max-w-xl">
+      <li class="mb-5 max-w-xl hover:scale-105 ">
         <Personaje
           :personaje="personaje"
           @enviarFav="aniadirElementoFavorito"

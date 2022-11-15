@@ -4,7 +4,7 @@
       type="text"
       v-model="filtro"
       placeholder="Busca un personaje"
-      class="w-56 bg-transparent border text-white mr-1 py-1 px-2"
+      class="w-56 bg-transparent border border-orange-600 text-white mr-1 py-1 px-2 rounded-full"
       @keyup.enter="buscarPersonaje"
     />
   </div>
