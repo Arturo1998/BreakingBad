@@ -6,13 +6,19 @@
       alt=""
       v-if="verMas"
     />
-    <h1 class="text-white p-3">{{ favorito.name }}</h1>
+    <h1 class="text-white p-3 text-xl">{{ favorito.name }}</h1>
+    <div v-if="!verMas" class="text-white mb-3">
+      <h1 class="text-orange-500">Dead or alive: </h1>
+      <p >{{ favorito.status }}</p>
+      <h1 class="text-orange-500">Interpretado por: </h1>
+      <p >{{ favorito.portrayed }}</p>
+    </div>
     <div class="flex flex-col">
       <button
         class="rounded-lg text-white bg-orange-700 p-2 w-20 mb-2"
-        @click="verMas = !verMas"
+        @click="mostrarinfo"
       >
-        Ver más
+        {{ botonInfo }}
       </button>
       <button
         class="rounded-lg text-white bg-red-800 p-2 mb-2"
@@ -31,6 +37,7 @@ export default {
   data() {
     return {
       verMas: true,
+      botonInfo: "Ver más",
     };
   },
   props: {
@@ -43,6 +50,15 @@ export default {
     eliminarFav() {
       if (confirm(`¿Estás seguro de eliminar a ${this.favorito.name}?`))
         this.$emit("eliminarFav", this.favorito);
+    },
+
+    mostrarinfo() {
+      this.verMas = !this.verMas;
+      if (this.verMas === false) {
+        this.botonInfo = "Ver menos";
+      } else {
+        this.botonInfo = "Ver más";
+      }
     },
   },
 };
