@@ -22,7 +22,10 @@
         >
           Tu búsqueda
         </h1>
-        <h1 class="mb-2 mt-0 rounded-lg text-gray-400 p-2 text-xl" v-else>
+        <h1
+          class="mb-2 mt-0 rounded-lg text-gray-400 p-2 text-xl"
+          v-else-if="!isLoading"
+        >
           Introduce un nombre para ver los personajes
         </h1>
 
