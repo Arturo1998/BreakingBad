@@ -7,19 +7,24 @@
       alt=""
       class="min-w-100 max-h-96 mx-auto"
     />
-    <div class="mt-5 mb-5 flex justify-center">
-      <Buscador @buscarPersonaje="filtrar" v-model="filtro" />
+    <div class="mt-8 mb-5 flex justify-center">
+      <Buscador @buscarPersonaje="loadCharacters" v-model="filtro" />
     </div>
 
     <div class="text-center flex flex-col md:flex-row w-100">
-      <div class="m-auto" v-if="filtrarPersonajes">
+      <div class="m-auto">
         <h1
           class="mb-2 rounded-lg bg-gray-600 text-white border border-orange-700 p-2"
+          v-if="characters.length != 0"
         >
           Tu búsqueda
         </h1>
+        <h1 class="mb-2 mt-0 rounded-lg text-gray-400 p-2 text-xl" v-else>
+          Introduce un nombre para ver los personajes
+        </h1>
+
         <ListaPersonajes
-          :lista="filtrarPersonajes"
+          :lista="characters"
           @enviarFav="aniadirFavorito"
           bg-gray-80
         />
@@ -58,7 +63,6 @@ export default {
     Buscador,
     Loading,
   },
-
   data() {
     return {
       characters: [],
@@ -68,57 +72,36 @@ export default {
       isLoading: false,
     };
   },
-
   mounted() {
     if (localStorage.getItem("favs")) {
       this.favs = JSON.parse(localStorage.getItem("favs"));
     }
-
-    this.loadCharacters();
   },
-
-  computed: {
-    filtrarPersonajes() {
-      if (this.filtrar_por === "") {
-        return this.characters;
-      } else if (this.filtrar != "") {
-        return this.characters.filter((character) =>
-          character.name.toUpperCase().includes(this.filtrar_por.toUpperCase())
-        );
-      }
-    },
-  },
-
   methods: {
-    async loadCharacters() {
+    async loadCharacters(data) {
+      this.filtrar_por = data;
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1500);
       try {
         const response = await axios.get(
-          `https://www.breakingbadapi.com/api/characters`
+          `https://www.breakingbadapi.com/api/characters?name=${this.filtrar_por}`
         );
         this.characters = response.data;
       } catch (error) {
         console.log(error);
       }
     },
-
     aniadirFavorito(data) {
       if (!this.favs.includes(data)) {
         this.favs.push(data);
         this.guardarLocal();
       }
     },
-
     eliminarElemento(data) {
       this.favs = this.favs.filter((el) => el !== data);
       localStorage.setItem("favs", JSON.stringify(this.favs));
-    },
-
-    filtrar(data) {
-      this.filtrar_por = data;
-      this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 1500);
     },
 
     guardarLocal() {
