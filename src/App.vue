@@ -10,6 +10,9 @@
     <div class="mt-8 mb-5 flex justify-center">
       <Buscador @buscarPersonaje="loadCharacters" v-model="filtro" />
     </div>
+    <div v-if="isLoading">
+      <Loading :busca="inputUsuario" />
+    </div>
 
     <div class="text-center flex flex-col md:flex-row w-100">
       <div class="m-auto">
@@ -41,7 +44,6 @@
         <ListaFavs :listaFavs="favs" @eliminarFav="eliminarElemento" />
       </div>
     </div>
-    <loading v-model:active="isLoading" :is-full-page="true" loader="bars" />
   </div>
 </template>
 
@@ -49,8 +51,7 @@
 /*<button @click="" class="rounded-lg text-white bg-orange-700 p-2 w-auto mb-2">
         Cargar Personajes
       </button>*/
-import Loading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/css/index.css";
+import Loading from "@/components/Loading.vue";
 import axios from "axios";
 import Buscador from "@/components/Buscador.vue";
 import ListaPersonajes from "@/components/ListaPersonajes.vue";
@@ -67,7 +68,7 @@ export default {
     return {
       characters: [],
       favs: [],
-      filtrar_por: "",
+      inputUsuario: "",
       filtro: "",
       isLoading: false,
     };
@@ -79,16 +80,16 @@ export default {
   },
   methods: {
     async loadCharacters(data) {
-      this.filtrar_por = data;
+      this.inputUsuario = data;
       this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 1500);
       try {
         const response = await axios.get(
-          `https://www.breakingbadapi.com/api/characters?name=${this.filtrar_por}`
+          `https://www.breakingbadapi.com/api/characters?name=${this.inputUsuario}`
         );
-        this.characters = response.data;
+        setTimeout(() => {
+          this.isLoading = false;
+          this.characters = response.data;
+        }, 1500);
       } catch (error) {
         console.log(error);
       }
@@ -97,6 +98,8 @@ export default {
       if (!this.favs.includes(data)) {
         this.favs.push(data);
         this.guardarLocal();
+      } else {
+        return null;
       }
     },
     eliminarElemento(data) {
